@@ -1,0 +1,28 @@
+function [sliderVal] = slider(window,sliderRect,mouseX, mouseY,radius,sliderCol,ballCol,leftStr,rightStr,currentVal,text)
+[ScreenX, ScreenY] = WindowSize(window);
+cx = ScreenX/2;
+cy = ScreenY/2;
+midXslider = (sliderRect(1) + sliderRect(3)) / 2;
+midYslider = (sliderRect(2) + sliderRect(4)) / 2;
+ballRect = [mouseX-radius midYslider-radius mouseX+radius midYslider+radius];
+DrawFormattedText(window, text, 'center', 0.2*ScreenY, sliderCol, [], [], [], 2, [], []);
+if mouseX <= sliderRect(3) && mouseX >= sliderRect(1) && mouseY <= sliderRect(4)+20 && mouseY >= sliderRect(2)-20
+    Screen('FillRect', window, sliderCol, sliderRect);
+    Screen('FillOval', window, ballCol, ballRect);
+    sliderVal = round(100*((mouseX-sliderRect(1)) / (sliderRect(3)-sliderRect(1))));
+    DrawFormattedText(window, ['100% ' leftStr], sliderRect(1)-350, midYslider+25, sliderCol, [], [], [], 2, [], []);
+    DrawFormattedText(window, ['100% ' rightStr], sliderRect(3)+50, midYslider+25, sliderCol, [], [], [], 2, [], []);
+    DrawFormattedText(window, [num2str(sliderVal) '% ' rightStr '\n' num2str(100-sliderVal) '% ' leftStr], midXslider-100, midYslider+100, sliderCol, [], [], [], 2, [], []);
+    Screen('Flip', window);
+else
+    if currentVal == -1
+        Screen('FillRect', window, sliderCol, sliderRect);
+        Screen('FillOval', window, ballCol, ballRect);
+        DrawFormattedText(window, ['100% ' leftStr], sliderRect(1)-350, midYslider+25, sliderCol, [], [], [], 2, [], []);
+        DrawFormattedText(window, ['100% ' rightStr], sliderRect(3)+50, midYslider+25, sliderCol, [], [], [], 2, [], []);
+        DrawFormattedText(window, [num2str(50) '% ' rightStr '\n' num2str(50) '% ' leftStr], midXslider-100, midYslider+100, sliderCol, [], [], [], 2, [], []);
+        Screen('Flip',window);
+    end
+    sliderVal = currentVal;
+end
+end
