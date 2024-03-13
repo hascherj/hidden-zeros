@@ -169,12 +169,16 @@ try
     Ckey=KbName('c');
     Dkey=KbName('d');
     Pkey=KbName('p');
+    numKeys = [KbName('1') KbName('1!') KbName('2') KbName('2@') KbName('3') KbName('3#') KbName('4') KbName('4$') KbName('5') KbName('5%') KbName('6') KbName('6^') KbName('7') KbName('7&') KbName('8') KbName('8*') KbName('9') KbName('9(') KbName('0') KbName('0)')];
+    translatedNums = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,0,0];
     leftButton=[KbName('1!') KbName('1') KbName(',<') KbName('leftarrow')];
     rightButton=[KbName('2@') KbName('2') KbName('.>') KbName('rightarrow')];
     if IsOSX
         enterButton=[KbName('enter') KbName('return')];
+        backButton = KbName('delete');
     else
         enterButton=KbName('return');
+        backButton = KbName('BackSpace');
     end %if ismac
 
     %%% Screen Visuals %%%
@@ -370,12 +374,12 @@ try
 %     textBoxL1 = [A+(1/3)*m G-C-(2/3)*m A+(2/3)*m G-C-(1/3)*m];
 %     textBoxL2 = [A+(4/3)*m G-C-(2/3)*m A+(5/3)*m G-C-(1/3)*m];
 %     textBoxL3 = [A+(7/3)*m G-C-(2/3)*m A+(8/3)*m G-C-(1/3)*m];
-%     textBoxL1 = [A+(1/3)*m G-C-(4/3)*m A+(2/3)*m G-C-(3/3)*m];
-%     textBoxL2 = [A+(4/3)*m G-C-(4/3)*m A+(5/3)*m G-C-(3/3)*m];
-%     textBoxL3 = [A+(7/3)*m G-C-(4/3)*m A+(8/3)*m G-C-(3/3)*m];
-    textBoxL1 = [A+(1/3)*m G-C-(1/3)*m A+(2/3)*m G-C];
-    textBoxL2 = [A+(4/3)*m G-C-(1/3)*m A+(5/3)*m G-C];
-    textBoxL3 = [A+(7/3)*m G-C-(1/3)*m A+(8/3)*m G-C];
+    textBoxL1 = [A+(1/3)*m G-C-(4/3)*m A+(2/3)*m G-C-(3/3)*m];
+    textBoxL2 = [A+(4/3)*m G-C-(4/3)*m A+(5/3)*m G-C-(3/3)*m];
+    textBoxL3 = [A+(7/3)*m G-C-(4/3)*m A+(8/3)*m G-C-(3/3)*m];
+%     textBoxL1 = [A+(1/3)*m G-C-(1/3)*m A+(2/3)*m G-C];
+%     textBoxL2 = [A+(4/3)*m G-C-(1/3)*m A+(5/3)*m G-C];
+%     textBoxL3 = [A+(7/3)*m G-C-(1/3)*m A+(8/3)*m G-C];
     DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL1);
     DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL2);
     DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL3);
@@ -409,12 +413,12 @@ try
 %     textBoxR1 = [cx+A+(1/3)*m G-C-(2/3)*m cx+A+(2/3)*m G-C-(1/3)*m];
 %     textBoxR2 = [cx+A+(4/3)*m G-C-(2/3)*m cx+A+(5/3)*m G-C-(1/3)*m];
 %     textBoxR3 = [cx+A+(7/3)*m G-C-(2/3)*m cx+A+(8/3)*m G-C-(1/3)*m];
-%     textBoxR1 = [cx+A+(1/3)*m G-C-(3/3)*m cx+A+(2/3)*m G-C-(2/3)*m];
-%     textBoxR2 = [cx+A+(4/3)*m G-C-(3/3)*m cx+A+(5/3)*m G-C-(2/3)*m];
-%     textBoxR3 = [cx+A+(7/3)*m G-C-(3/3)*m cx+A+(8/3)*m G-C-(2/3)*m];
-    textBoxR1 = [cx+A+(1/3)*m G-C-(1/3)*m cx+A+(2/3)*m G-C];
-    textBoxR2 = [cx+A+(4/3)*m G-C-(1/3)*m cx+A+(5/3)*m G-C];
-    textBoxR3 = [cx+A+(7/3)*m G-C-(1/3)*m cx+A+(8/3)*m G-C];
+    textBoxR1 = [cx+A+(1/3)*m G-C-(4/3)*m cx+A+(2/3)*m G-C-(3/3)*m];
+    textBoxR2 = [cx+A+(4/3)*m G-C-(4/3)*m cx+A+(5/3)*m G-C-(3/3)*m];
+    textBoxR3 = [cx+A+(7/3)*m G-C-(4/3)*m cx+A+(8/3)*m G-C-(3/3)*m];
+%     textBoxR1 = [cx+A+(1/3)*m G-C-(1/3)*m cx+A+(2/3)*m G-C];
+%     textBoxR2 = [cx+A+(4/3)*m G-C-(1/3)*m cx+A+(5/3)*m G-C];
+%     textBoxR3 = [cx+A+(7/3)*m G-C-(1/3)*m cx+A+(8/3)*m G-C];
     DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR1);
     DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR2);
     DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR3);
@@ -476,22 +480,22 @@ try
 %     DD_R1 = [ScreenX-A-(8/3)*m G2+C+(2/3)*m ScreenX-A-(7/3)*m G2+C+(3/3)*m];
 %     DD_R2 = [ScreenX-A-(5/3)*m G2+C+(2/3)*m ScreenX-A-(4/3)*m G2+C+(3/3)*m];
 %     DD_R3 = [ScreenX-A-(2/3)*m G2+C+(2/3)*m ScreenX-A-(1/3)*m G2+C+(3/3)*m];
-%     DD_L1 = [altBoxW-A-(8/3)*m G2+C+(4/3)*m altBoxW-A-(7/3)*m G2+C+(5/3)*m];
-%     DD_L2 = [altBoxW-A-(5/3)*m G2+C+(4/3)*m altBoxW-A-(4/3)*m G2+C+(5/3)*m];
-%     DD_L3 = [altBoxW-A-(2/3)*m G2+C+(4/3)*m altBoxW-A-(1/3)*m G2+C+(5/3)*m];
-%     DD_R1 = [ScreenX-A-(8/3)*m G2+C+(4/3)*m ScreenX-A-(7/3)*m G2+C+(5/3)*m];
-%     DD_R2 = [ScreenX-A-(5/3)*m G2+C+(4/3)*m ScreenX-A-(4/3)*m G2+C+(5/3)*m];
-%     DD_R3 = [ScreenX-A-(2/3)*m G2+C+(4/3)*m ScreenX-A-(1/3)*m G2+C+(5/3)*m];
-    DD_L1 = [altBoxW-A-(8/3)*m G2+C+(1/3)*m altBoxW-A-(7/3)*m G2+C+(2/3)*m];
-    DD_L2 = [altBoxW-A-(5/3)*m G2+C+(1/3)*m altBoxW-A-(4/3)*m G2+C+(2/3)*m];
-    DD_L3 = [altBoxW-A-(2/3)*m G2+C+(1/3)*m altBoxW-A-(1/3)*m G2+C+(2/3)*m];
-    DD_R1 = [ScreenX-A-(8/3)*m G2+C+(1/3)*m ScreenX-A-(7/3)*m G2+C+(2/3)*m];
-    DD_R2 = [ScreenX-A-(5/3)*m G2+C+(1/3)*m ScreenX-A-(4/3)*m G2+C+(2/3)*m];
-    DD_R3 = [ScreenX-A-(2/3)*m G2+C+(1/3)*m ScreenX-A-(1/3)*m G2+C+(2/3)*m];
+    DD_L1 = [altBoxW-A-(8/3)*m G2+C+(4/3)*m altBoxW-A-(7/3)*m G2+C+(5/3)*m];
+    DD_L2 = [altBoxW-A-(5/3)*m G2+C+(4/3)*m altBoxW-A-(4/3)*m G2+C+(5/3)*m];
+    DD_L3 = [altBoxW-A-(2/3)*m G2+C+(4/3)*m altBoxW-A-(1/3)*m G2+C+(5/3)*m];
+    DD_R1 = [ScreenX-A-(8/3)*m G2+C+(4/3)*m ScreenX-A-(7/3)*m G2+C+(5/3)*m];
+    DD_R2 = [ScreenX-A-(5/3)*m G2+C+(4/3)*m ScreenX-A-(4/3)*m G2+C+(5/3)*m];
+    DD_R3 = [ScreenX-A-(2/3)*m G2+C+(4/3)*m ScreenX-A-(1/3)*m G2+C+(5/3)*m];
+%     DD_L1 = [altBoxW-A-(8/3)*m G2+C+(1/3)*m altBoxW-A-(7/3)*m G2+C+(2/3)*m];
+%     DD_L2 = [altBoxW-A-(5/3)*m G2+C+(1/3)*m altBoxW-A-(4/3)*m G2+C+(2/3)*m];
+%     DD_L3 = [altBoxW-A-(2/3)*m G2+C+(1/3)*m altBoxW-A-(1/3)*m G2+C+(2/3)*m];
+%     DD_R1 = [ScreenX-A-(8/3)*m G2+C+(1/3)*m ScreenX-A-(7/3)*m G2+C+(2/3)*m];
+%     DD_R2 = [ScreenX-A-(5/3)*m G2+C+(1/3)*m ScreenX-A-(4/3)*m G2+C+(2/3)*m];
+%     DD_R3 = [ScreenX-A-(2/3)*m G2+C+(1/3)*m ScreenX-A-(1/3)*m G2+C+(2/3)*m];
 
     %Choice Boxes (to highlight selected alternative)
-    leftAltBox = [(4/5)*A G-C-(5/4)*m altBoxW-(4/5)*A G2+C+(5/4)*m];
-    rightAltBox = [altBoxW+(4/5)*A G-C-(5/4)*m ScreenX-(4/5)*A G2+C+(5/4)*m];
+    leftAltBox = [(4/5)*A G-C-(9/4)*m altBoxW-(4/5)*A G2+C+(9/4)*m];
+    rightAltBox = [altBoxW+(4/5)*A G-C-(9/4)*m ScreenX-(4/5)*A G2+C+(9/4)*m];
 
     %Number boxes for ROI's
     Box(1,:) = textBoxL1;
@@ -1361,8 +1365,8 @@ try
             while ~Choose2
                 Screen('DrawTexture',onScreen,trialChoice);
                 Screen('FrameRect', onScreen, redcol, choiceBox, 5);
-                Screen('FillRect',onScreen,0,[cx-(cx/5) ScreenY*.85 cx + (cx/5) ScreenY*.95])
-                DrawFormattedText(onScreen,'CONFIRM CHOICE','center',(.9*ScreenY),whitecol);
+                Screen('FillRect',onScreen,0,[cx-(cx/5) ScreenY*.45 cx + (cx/5) ScreenY*.55])
+                DrawFormattedText(onScreen,'CONFIRM CHOICE','center','center',whitecol);
                 Screen('Flip',onScreen);
                 %Take Screenshot
                 if screenCap && i == 1
@@ -1657,16 +1661,22 @@ try
                 DD_1 = DD;
                 DD_2 = DD + 1;
                 DD_3 = DD + 2;
+                LL_L = BoxL4;
+                LL_R = BoxR4;
             elseif LL_Position == 1
                 %Need day before and after
                 DD_1 = DD - 1;
                 DD_2 = DD;
                 DD_3 = DD + 1;
+                LL_L = BoxL5;
+                LL_R = BoxR5;
             elseif LL_Position == 2
                 %Need 2 days before
                 DD_1 = DD - 2;
                 DD_2 = DD - 1;
                 DD_3 = DD;
+                LL_L = BoxL6;
+                LL_R = BoxR6;
             end
             %Make text versions
             SS_t = num2str(SS);
@@ -1843,8 +1853,8 @@ try
             while ~Choose2
                 Screen('DrawTexture',onScreen,trialChoice);
                 Screen('FrameRect', onScreen, redcol, choiceBox, 5);
-                Screen('FillRect',onScreen,0,[cx-(cx/5) ScreenY*.85 cx + (cx/5) ScreenY*.95])
-                DrawFormattedText(onScreen,'CONFIRM CHOICE','center',(.9*ScreenY),whitecol);
+                Screen('FillRect',onScreen,0,[cx-(cx/5) ScreenY*.45 cx + (cx/5) ScreenY*.55])
+                DrawFormattedText(onScreen,'CONFIRM CHOICE','center','center',whitecol);
                 Screen('Flip',onScreen);
                 %Take Screenshot
                 if screenCap && i == 1
@@ -1979,6 +1989,32 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     if doAttn
+
+        % Instruction screen
+        line1 =  'You have completed all of the choices.\n Please feel free to move your chin from the chin rest.\n\n There are a few more questions for you to answer.\n';
+        line2 = 'In each of the following questions, you will be asked about your behavior during the experiment.\n';
+        line3 = 'Please press the space bar to begin.';
+        DrawFormattedText(onScreen, [line1 line2 line3], 'center', 'center', whitecol, [], [], [], 2, [], []);
+        Screen('Flip',onScreen);
+
+        %Wait for button press
+        while KbCheck
+        end
+    
+        FlushEvents('keyDown');
+        proceed = 0;
+        while proceed == 0
+            [keyIsDown, secs, keyCode] = KbCheck(-1);
+            if keyIsDown
+                if keyCode(escKey)
+                    ListenChar(0); clear screen; error('User terminated script with ESCAPE key.')
+                elseif keyCode(RAkey)
+                    proceed = 1;
+                end
+            end
+        end %while proceed
+
+
     attnRuns = 0;
     while attnRuns < 2
     if (~attnRuns && ~attnOrder) || (attnRuns && attnOrder)
@@ -1989,14 +2025,12 @@ try
         
         ShowCursor;
         % Instruction screen
-        line1 =  'You have completed all of the choices.\n Please feel free to move your chin from the chin rest.\n\n There are a few more questions for you to answer.\n';
-        line2 = 'In each of the following questions, you will be asked about your behavior during the experiment.\n';
-        line3 = 'You will be presented with a slider like the one below.\n Use your mouse to move the slider to your desired response.\n';
-        line4 = 'Once the slider is where you want it to be, press the space bar.';
-        line5 = '\n\n If you have any questions, please ask the experimenter at this time.';
-        line6 = 'Otherwise, press the space bar to begin.';
+        line1 = 'On the following screens, you will be presented with a slider like the one below.\n Use your mouse to move the slider to your desired response.\n';
+        line2 = 'Once the slider is where you want it to be, press the space bar.';
+        line3 = '\n\n If you have any questions, please ask the experimenter at this time.';
+        line4 = 'Otherwise, press the space bar to begin.';
         slider0 = [ScreenX*.25,5*ScreenY/6,ScreenX*0.75,5*ScreenY/6+10];
-        slider(onScreen,slider0,cx,cy,20,whitecol,redcol,'Option 1','Option 2',-1,[line1 line2 line3 line4 line5 line6]);
+        slider(onScreen,slider0,cx,cy,20,whitecol,redcol,'Option 1','Option 2',-1,[line1 line2 line3 line4]);
     
     
         %Wait for button press
@@ -2009,7 +2043,7 @@ try
         while proceed == 0
             [x,y,buttons] = GetMouse(onScreen);
             if any(buttons)
-                sliderVal = slider(onScreen,slider0,x,y,20,whitecol,redcol,'Option 1','Option 2',sliderVal,[line1 line2 line3 line4 line5 line6]);
+                sliderVal = slider(onScreen,slider0,x,y,20,whitecol,redcol,'Option 1','Option 2',sliderVal,[line1 line2 line3 line4]);
             end
     
             [keyIsDown, secs, keyCode] = KbCheck(-1);
@@ -2252,165 +2286,410 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%% COLOR ELICITATION %%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
     if (~attnRuns && attnOrder) || (attnRuns && ~attnOrder) % if do Colors
-        
-        % Draw and Color Last Trial
-        % Left vs. Right Screen cols
-        Screen('FillRect',onScreen,marooncol,[0,0,ScreenX/2,ScreenY])
-        Screen('FillRect',onScreen,purpcol,[ScreenX/2,0,ScreenX,ScreenY])
-        
-        %Redraw boxes
-            Screen('FrameRect', onScreen, whitecol, BoxL1,2);
-            Screen('FrameRect', onScreen, whitecol, BoxL2,2);
-            Screen('FrameRect', onScreen, whitecol, BoxL3,2);
-        
-            Screen('FrameRect', onScreen, whitecol, BoxL4,2);
-            Screen('FrameRect', onScreen, whitecol, BoxL5,2);
-            Screen('FrameRect', onScreen, whitecol, BoxL6,2);
-        
-        
-            Screen('FillOval', onScreen, whitecol,dotL1);
-            Screen('FillOval', onScreen, whitecol,dotL2);
-            Screen('FillOval', onScreen, whitecol,dotL3);
-        
-            %Add the text (only for the top for now)
-            lineDay = 'Day\n';
-            line2 = '1';
-            line3 = '2';
-            line4 = '3';
 
-            Screen('FillRect',onScreen,greencol,[textBoxL1(1)-m textBoxL1(2)-m textBoxL1(3)+m textBoxL1(4)+m])
-            DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL1);
-            DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL2);
-            DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL3);
-        
-            Screen('FrameRect', onScreen, whitecol, BoxR1,2);
-            Screen('FrameRect', onScreen, whitecol, BoxR2,2);
-            Screen('FrameRect', onScreen, whitecol, BoxR3,2);
-        
-            Screen('FrameRect', onScreen, whitecol, BoxR4,2);
-            Screen('FrameRect', onScreen, whitecol, BoxR5,2);
-            Screen('FrameRect', onScreen, whitecol, BoxR6,2);
-        
-        
-            Screen('FillOval', onScreen, whitecol,dotR1);
-            Screen('FillOval', onScreen, whitecol,dotR2);
-            Screen('FillOval', onScreen, whitecol,dotR3);
-        
-            DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR1);
-            DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR2);
-            DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR3);
-        
-            %Add dashed vertical line down the middle
-            Screen('LineStipple', onScreen, 1, 5, [0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1]);
-            Screen('DrawLine', onScreen, whitecol, cx, 0, cx, ScreenY, 3);
-            Screen('LineStipple', onScreen, 0);
-            if SS_Right
-                Screen('FillRect',onScreen,bluecol,SS_R)
-                Screen('FillRect',onScreen,yellowcol,LL_L)
-                temp = {DD_L1, DD_L2, DD_L3};
-                temp = temp{LL_Position};
-                Screen('FillRect',onScreen,orangecol,temp)
-            else
-                Screen('FillRect',onScreen,bluecol,SS_L)
-                Screen('FillRect',onScreen,yellowcol,LL_R)
-                temp = {DD_R1, DD_R2, DD_R3};
-                temp = temp{LL_Position};
-                Screen('FillRect',onScreen,orangecol,temp)
-            end
+        allGood = 0;
+        selectedBox = 1;
+        boxStringsLast = [" "," "," "," "," "," "];
+        boxValuesLast = [0,0,0,0,0,0];
+        while ~allGood
+            % Draw and Color Last Trial
+            % Left vs. Right Screen cols
+            Screen('FillRect',onScreen,marooncol,[0,0,ScreenX/2,ScreenY])
+            Screen('FillRect',onScreen,purpcol,[ScreenX/2,0,ScreenX,ScreenY])
             
+            %Redraw boxes
+                Screen('FrameRect', onScreen, whitecol, BoxL1,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL2,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL3,2);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxL4,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL5,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL6,2);
+            
+            
+                Screen('FillOval', onScreen, whitecol,dotL1);
+                Screen('FillOval', onScreen, whitecol,dotL2);
+                Screen('FillOval', onScreen, whitecol,dotL3);
+            
+                %Add the text (only for the top for now)
+                lineDay = 'Day\n';
+                line2 = '1';
+                line3 = '2';
+                line4 = '3';
+                if SS_Right
+                    Screen('FillRect',onScreen,greencol,[textBoxR1(1)-0.3*m textBoxR1(2)-0.7*m textBoxR1(3)+0.3*m textBoxR1(4)+0.4*m])
+                else
+                    Screen('FillRect',onScreen,greencol,[textBoxL1(1)-0.3*m textBoxL1(2)-0.7*m textBoxL1(3)+0.3*m textBoxL1(4)+0.4*m])
+                end
+                DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL1);
+                DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL2);
+                DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL3);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxR1,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR2,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR3,2);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxR4,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR5,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR6,2);
+            
+            
+                Screen('FillOval', onScreen, whitecol,dotR1);
+                Screen('FillOval', onScreen, whitecol,dotR2);
+                Screen('FillOval', onScreen, whitecol,dotR3);
+            
+                DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR1);
+                DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR2);
+                DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR3);
+            
+                %Add dashed vertical line down the middle
+                Screen('LineStipple', onScreen, 1, 5, [0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1]);
+                Screen('DrawLine', onScreen, whitecol, cx, 0, cx, ScreenY, 3);
+                Screen('LineStipple', onScreen, 0);
+                if SS_Right
+                    Screen('FillRect',onScreen,bluecol,SS_R)
+                    Screen('FillRect',onScreen,yellowcol,LL_L)
+                    temp = {DD_L1, DD_L2, DD_L3};
+                    temp = temp{(LL_Position+1)};
+                    Screen('FillRect',onScreen,orangecol,[temp(1)-0.3*m temp(2)-0.7*m temp(3)+0.3*m temp(4)+0.4*m])
+                else
+                    Screen('FillRect',onScreen,bluecol,SS_L)
+                    Screen('FillRect',onScreen,yellowcol,LL_R)
+                    temp = {DD_R1, DD_R2, DD_R3};
+                    temp = temp{(LL_Position+1)};
+                    Screen('FillRect',onScreen,orangecol,[temp(1)-0.3*m temp(2)-0.7*m temp(3)+0.3*m temp(4)+0.4*m])
+                end
+                
+            
+                %Add in last trial values
+                %SS and LL
+                if SS_Right
+                    DrawFormattedText(onScreen,['$' SS_t],'center', 'center', whitecol, [], [], [], 2, [], SS_R);
+                    DrawFormattedText(onScreen,['$' LL_t],'center', 'center', whitecol, [], [], [], 2, [], LL_L);
+                else
+                    DrawFormattedText(onScreen,['$' SS_t],'center', 'center', whitecol, [], [], [], 2, [], SS_L);
+                    DrawFormattedText(onScreen,['$' LL_t],'center', 'center', whitecol, [], [], [], 2, [], LL_R);
+                end
+                %Days
+                DrawFormattedText(onScreen,[lineDay DD1],'center', 'center', whitecol, [], [], [], 2, [], DD_L1);
+                DrawFormattedText(onScreen,[lineDay DD1],'center', 'center', whitecol, [], [], [], 2, [], DD_R1);
+                DrawFormattedText(onScreen,[lineDay DD2],'center', 'center', whitecol, [], [], [], 2, [], DD_L2);
+                DrawFormattedText(onScreen,[lineDay DD2],'center', 'center', whitecol, [], [], [], 2, [], DD_R2);
+                DrawFormattedText(onScreen,[lineDay DD3],'center', 'center', whitecol, [], [], [], 2, [], DD_L3);
+                DrawFormattedText(onScreen,[lineDay DD3],'center', 'center', whitecol, [], [], [], 2, [], DD_R3);
+                %Add in zeroes by condition and side
+                if SS_Right
+                    if whichCond == 1 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_R);
+                    end
+                    if whichCond == 2 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_L);
+                    end
+                else
+                    if whichCond == 1 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_L);
+                    end
+                    if whichCond == 2 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_R);
+                    end
+                end
+                lastTrialColored = Screen('GetImage', onScreen, [], 'backBuffer');
+                lastTrialColored = Screen('MakeTexture', onScreen, lastTrialColored); % Make this a texture, it's easier to draw
+                Screen('FillRect', onScreen, 0);
+                Screen('DrawTexture',onScreen,lastTrialColored,[],[quadX ScreenY/40 3*quadX ScreenY/40+cy]);
+    
+                line1 = 'In the LAST decision you made, what proportion of time did you spend looking at each of the areas above?\n';
+                line2 = 'Note: the sum of the numbers must equal 100.';
+                DrawFormattedText(onScreen, [line1 line2], 'center', cy+ScreenY/14, whitecol, [], [], [], 1.5, [], []);
+                sideLength = ScreenX/50;
+                boxColors = {greencol, bluecol, yellowcol, orangecol, marooncol, purpcol};
+                sumVals = sum(boxValuesLast);
+                %Draw Boxes
+                    for j = 1:6
+                        startY = cy+ScreenY/8+(j-1)*(1.2*sideLength);
+                        endY = startY + sideLength;
+                        Screen('FillRect',onScreen,boxColors{j},[cx-0.05*ScreenX startY cx-0.05*ScreenX+sideLength endY]);
+                        Screen('FillRect',onScreen,whitecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        if j == selectedBox
+                            Screen('FillRect',onScreen,slatecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        end
+                        Screen('FrameRect',onScreen,whitecol,[cx-0.05*ScreenX startY cx-0.05*ScreenX+sideLength endY]);
+                        Screen('FrameRect',onScreen,whitecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        Screen('TextSize',onScreen,25);
+                        if boxStringsLast(j) ~= " "
+                            DrawFormattedText(onScreen,num2str(boxValuesLast(j)),'center','center',whitecol,[],[],[],[],[],[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        end
+                        Screen('TextSize',onScreen,30);
+                    end
+                    DrawFormattedText(onScreen,'Total:',cx-0.05*ScreenX-sideLength,cy+ScreenY/8+7*(1.2*sideLength),whitecol);
+                    Screen('FillRect',onScreen,whitecol,[cx+0.025*ScreenX cy+ScreenY/8+(6)*(1.3*sideLength) cx+0.025*ScreenX+2*sideLength cy+ScreenY/8+(6)*(1.3*sideLength)+sideLength]);
+                    DrawFormattedText(onScreen,num2str(sumVals),'center','center',whitecol,[],[],[],[],[],[cx+0.025*ScreenX cy+ScreenY/8+(6)*(1.3*sideLength) cx+0.025*ScreenX+2*sideLength cy+ScreenY/8+(6)*(1.3*sideLength)+sideLength]);
+            ShowCursor;
+            Screen('Flip',onScreen)
+            %Wait for button press
+            while KbCheck
+            end
         
-            %Add in last trial values
-            %SS and LL
-            if SS_Right
-                DrawFormattedText(onScreen,['$' SS_t],'center', 'center', whitecol, [], [], [], 2, [], SS_R);
-                DrawFormattedText(onScreen,['$' LL_t],'center', 'center', whitecol, [], [], [], 2, [], LL_L);
-            else
-                DrawFormattedText(onScreen,['$' SS_t],'center', 'center', whitecol, [], [], [], 2, [], SS_L);
-                DrawFormattedText(onScreen,['$' LL_t],'center', 'center', whitecol, [], [], [], 2, [], LL_R);
-            end
-            %Days
-            DrawFormattedText(onScreen,[lineDay DD1],'center', 'center', whitecol, [], [], [], 2, [], DD_L1);
-            DrawFormattedText(onScreen,[lineDay DD1],'center', 'center', whitecol, [], [], [], 2, [], DD_R1);
-            DrawFormattedText(onScreen,[lineDay DD2],'center', 'center', whitecol, [], [], [], 2, [], DD_L2);
-            DrawFormattedText(onScreen,[lineDay DD2],'center', 'center', whitecol, [], [], [], 2, [], DD_R2);
-            DrawFormattedText(onScreen,[lineDay DD3],'center', 'center', whitecol, [], [], [], 2, [], DD_L3);
-            DrawFormattedText(onScreen,[lineDay DD3],'center', 'center', whitecol, [], [], [], 2, [], DD_R3);
-            %Add in zeroes by condition and side
-            if SS_Right
-                if whichCond == 1 || whichCond == 3
-                    DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_R);
+            FlushEvents('keyDown');
+            proceed = 0;
+            while proceed == 0
+                [keyIsDown, secs, keyCode] = KbCheck(-1);
+                if keyIsDown
+                    str = boxStringsLast(selectedBox);
+                    if keyCode(escKey)
+                        ListenChar(0); clear screen; error('User terminated script with ESCAPE key.')
+                    elseif keyCode(RAkey) && sumVals == 100
+                        proceed = 1;
+                        allGood = 1;
+                    elseif keyCode(Upkey)
+                        if selectedBox ~= 1
+                            selectedBox = selectedBox - 1;
+                        end
+                        proceed = 1;
+                    elseif keyCode(Downkey)
+                        if selectedBox ~= 6
+                            selectedBox = selectedBox + 1;
+                        end
+                        proceed = 1;
+                    elseif any(keyCode(numKeys))
+                        trueIndex = find(keyCode(numKeys));
+                        numOut = translatedNums(trueIndex);
+                        if strlength(str) ~= 2
+                            if str == " "
+                                newNum = num2str(numOut);
+                            else
+                                if str ~= "0"
+                                    newNum = str + num2str(numOut);
+                                end
+                            end
+                        elseif str == "10" && numOut == 0
+                            newNum = "100";
+                        end
+                        boxStringsLast(selectedBox) = newNum;
+                        boxValuesLast(selectedBox) = str2double(newNum);
+                        proceed = 1;
+                    elseif keyCode(backButton)
+                        if str ~= " "
+                            if strlength(str) == 1
+                                newNum = " ";
+                                boxValuesLast(selectedBox) = 0;
+                            else
+                                newNum = extractBefore(str, strlength(str));
+                                boxValuesLast(selectedBox) = str2double(newNum);
+                            end
+                            boxStringsLast(selectedBox) = newNum;
+                        end
+                        proceed = 1;
+                    end
                 end
-                if whichCond == 2 || whichCond == 3
-                    DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_L);
-                end
-            else
-                if whichCond == 1 || whichCond == 3
-                    DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_L);
-                end
-                if whichCond == 2 || whichCond == 3
-                    DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_R);
-                end
-            end
-        ShowCursor;
-        Screen('Flip',onScreen)
-        %Wait for button press
-        while KbCheck
-        end
-    
-        FlushEvents('keyDown');
-        proceed = 0;
-        while proceed == 0
-            [keyIsDown, secs, keyCode] = KbCheck(-1);
-            if keyIsDown
-                if keyCode(escKey)
-                    ListenChar(0); clear screen; error('User terminated script with ESCAPE key.')
-                elseif keyCode(RAkey)
-                    proceed = 1;
-                end
-            end
-        end %while proceed
-        WaitSecs(.5);
-        Screen('Flip',onScreen);
+            end %while ~proceed
+            WaitSecs(.3);
+            Screen('Flip',onScreen);
 
-        % Instruction screen
-        line1 =  'COLORS: You have completed all of the choices.\n Please feel free to move your chin from the chin rest.\n\n There are a few more questions for you to answer.\n';
-        line2 = 'In each of the following questions, you will be asked about your behavior during the experiment.\n';
-        line3 = 'You will be presented with a slider like the one below.\n Use your mouse to move the slider to your desired response.\n';
-        line4 = 'Once the slider is where you want it to be, press the space bar.';
-        line5 = '\n\n If you have any questions, please ask the experimenter at this time.';
-        line6 = 'Otherwise, press the space bar to begin.';
-        slider0 = [ScreenX*.25,5*ScreenY/6,ScreenX*0.75,5*ScreenY/6+10];
-        slider(onScreen,slider0,cx,cy,20,whitecol,redcol,'Option 1','Option 2',-1,[line1 line2 line3 line4 line5 line6]);
-    
-    
-        %Wait for button press
-        while KbCheck
-        end
-    
-        FlushEvents('keyDown');
-        proceed = 0;
-        sliderVal = -1;
-        while proceed == 0
-            [x,y,buttons] = GetMouse(onScreen);
-            if any(buttons)
-                sliderVal = slider(onScreen,slider0,x,y,20,whitecol,redcol,'Option 1','Option 2',sliderVal,[line1 line2 line3 line4 line5 line6]);
-            end
-    
-            [keyIsDown, secs, keyCode] = KbCheck(-1);
-            if keyIsDown
-                if keyCode(escKey)
-                    ListenChar(0); clear screen; error('User terminated script with ESCAPE key.')
-                elseif keyCode(RAkey)
-                    proceed = 1;
-                end
-            end
-        end %while proceed
-        WaitSecs(.5);
-        Screen('Flip',onScreen);
+        end %while ~allGood
 
-        % Elicitation Screen 1
+
+        allGood = 0;
+        selectedBox = 1;
+        boxStringsAll = [" "," "," "," "," "," "];
+        boxValuesAll = [0,0,0,0,0,0];
+        while ~allGood
+            % Draw and Color Last Trial
+            % Left vs. Right Screen cols
+            Screen('FillRect',onScreen,marooncol,[0,0,ScreenX/2,ScreenY])
+            Screen('FillRect',onScreen,purpcol,[ScreenX/2,0,ScreenX,ScreenY])
+            
+            %Redraw boxes
+                Screen('FrameRect', onScreen, whitecol, BoxL1,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL2,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL3,2);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxL4,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL5,2);
+                Screen('FrameRect', onScreen, whitecol, BoxL6,2);
+            
+            
+                Screen('FillOval', onScreen, whitecol,dotL1);
+                Screen('FillOval', onScreen, whitecol,dotL2);
+                Screen('FillOval', onScreen, whitecol,dotL3);
+            
+                %Add the text (only for the top for now)
+                lineDay = 'Day\n';
+                line2 = '1';
+                line3 = '2';
+                line4 = '3';
+                if SS_Right
+                    Screen('FillRect',onScreen,greencol,[textBoxR1(1)-0.3*m textBoxR1(2)-0.7*m textBoxR1(3)+0.3*m textBoxR1(4)+0.4*m])
+                else
+                    Screen('FillRect',onScreen,greencol,[textBoxL1(1)-0.3*m textBoxL1(2)-0.7*m textBoxL1(3)+0.3*m textBoxL1(4)+0.4*m])
+                end
+                DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL1);
+                DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL2);
+                DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxL3);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxR1,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR2,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR3,2);
+            
+                Screen('FrameRect', onScreen, whitecol, BoxR4,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR5,2);
+                Screen('FrameRect', onScreen, whitecol, BoxR6,2);
+            
+            
+                Screen('FillOval', onScreen, whitecol,dotR1);
+                Screen('FillOval', onScreen, whitecol,dotR2);
+                Screen('FillOval', onScreen, whitecol,dotR3);
+            
+                DrawFormattedText(onScreen, [lineDay line2], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR1);
+                DrawFormattedText(onScreen, [lineDay line3], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR2);
+                DrawFormattedText(onScreen, [lineDay line4], 'center', 'center', whitecol, [], [], [], 2, [], textBoxR3);
+            
+                %Add dashed vertical line down the middle
+                Screen('LineStipple', onScreen, 1, 5, [0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1]);
+                Screen('DrawLine', onScreen, whitecol, cx, 0, cx, ScreenY, 3);
+                Screen('LineStipple', onScreen, 0);
+                if SS_Right
+                    Screen('FillRect',onScreen,bluecol,SS_R)
+                    Screen('FillRect',onScreen,yellowcol,LL_L)
+                    temp = {DD_L1, DD_L2, DD_L3};
+                    temp = temp{(LL_Position+1)};
+                    Screen('FillRect',onScreen,orangecol,[temp(1)-0.3*m temp(2)-0.7*m temp(3)+0.3*m temp(4)+0.4*m])
+                else
+                    Screen('FillRect',onScreen,bluecol,SS_L)
+                    Screen('FillRect',onScreen,yellowcol,LL_R)
+                    temp = {DD_R1, DD_R2, DD_R3};
+                    temp = temp{(LL_Position+1)};
+                    Screen('FillRect',onScreen,orangecol,[temp(1)-0.3*m temp(2)-0.7*m temp(3)+0.3*m temp(4)+0.4*m])
+                end
+                
+            
+                %Add in trial vars
+                %SS and LL
+                if SS_Right
+                    DrawFormattedText(onScreen,'$A','center', 'center', whitecol, [], [], [], 2, [], SS_R);
+                    DrawFormattedText(onScreen,'$B','center', 'center', whitecol, [], [], [], 2, [], LL_L);
+                else
+                    DrawFormattedText(onScreen,'$A','center', 'center', whitecol, [], [], [], 2, [], SS_L);
+                    DrawFormattedText(onScreen,'$B','center', 'center', whitecol, [], [], [], 2, [], LL_R);
+                end
+                %Days
+                DrawFormattedText(onScreen,[lineDay 'X'],'center', 'center', whitecol, [], [], [], 2, [], DD_L1);
+                DrawFormattedText(onScreen,[lineDay 'X'],'center', 'center', whitecol, [], [], [], 2, [], DD_R1);
+                DrawFormattedText(onScreen,[lineDay 'Y'],'center', 'center', whitecol, [], [], [], 2, [], DD_L2);
+                DrawFormattedText(onScreen,[lineDay 'Y'],'center', 'center', whitecol, [], [], [], 2, [], DD_R2);
+                DrawFormattedText(onScreen,[lineDay 'Z'],'center', 'center', whitecol, [], [], [], 2, [], DD_L3);
+                DrawFormattedText(onScreen,[lineDay 'Z'],'center', 'center', whitecol, [], [], [], 2, [], DD_R3);
+                %Add in zeroes by condition and side
+                if SS_Right
+                    if whichCond == 1 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_R);
+                    end
+                    if whichCond == 2 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_L);
+                    end
+                else
+                    if whichCond == 1 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], LL_L);
+                    end
+                    if whichCond == 2 || whichCond == 3
+                        DrawFormattedText(onScreen,'$0','center', 'center', whitecol, [], [], [], 2, [], SS_R);
+                    end
+                end
+                avgTrialColored = Screen('GetImage', onScreen, [], 'backBuffer');
+                avgTrialColored = Screen('MakeTexture', onScreen, avgTrialColored); % Make this a texture, it's easier to draw
+                Screen('FillRect', onScreen, 0);
+                Screen('DrawTexture',onScreen,avgTrialColored,[],[quadX ScreenY/40 3*quadX ScreenY/40+cy]);
+    
+                line1 = 'Across ALL decisions in the SECOND HALF of the study, what proportion of time did you spend looking at each of the areas above?\n';
+                line2 = 'Note: the sum of the numbers must equal 100.';
+                DrawFormattedText(onScreen, [line1 line2], 'center', cy+ScreenY/14, whitecol, [], [], [], 1.5, [], []);
+                sideLength = ScreenX/50;
+                boxColors = {greencol, bluecol, yellowcol, orangecol, marooncol, purpcol};
+                sumVals = sum(boxValuesAll);
+                %Draw Boxes
+                    for j = 1:6
+                        startY = cy+ScreenY/8+(j-1)*(1.2*sideLength);
+                        endY = startY + sideLength;
+                        Screen('FillRect',onScreen,boxColors{j},[cx-0.05*ScreenX startY cx-0.05*ScreenX+sideLength endY]);
+                        Screen('FillRect',onScreen,whitecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        if j == selectedBox
+                            Screen('FillRect',onScreen,slatecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        end
+                        Screen('FrameRect',onScreen,whitecol,[cx-0.05*ScreenX startY cx-0.05*ScreenX+sideLength endY]);
+                        Screen('FrameRect',onScreen,whitecol,[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        Screen('TextSize',onScreen,25);
+                        if boxStringsAll(j) ~= " "
+                            DrawFormattedText(onScreen,num2str(boxValuesAll(j)),'center','center',whitecol,[],[],[],[],[],[cx+0.025*ScreenX startY cx+0.025*ScreenX+2*sideLength endY]);
+                        end
+                        Screen('TextSize',onScreen,30);
+                    end
+                    DrawFormattedText(onScreen,'Total:',cx-0.05*ScreenX-sideLength,cy+ScreenY/8+7*(1.2*sideLength),whitecol);
+                    Screen('FillRect',onScreen,whitecol,[cx+0.025*ScreenX cy+ScreenY/8+(6)*(1.3*sideLength) cx+0.025*ScreenX+2*sideLength cy+ScreenY/8+(6)*(1.3*sideLength)+sideLength]);
+                    DrawFormattedText(onScreen,num2str(sumVals),'center','center',whitecol,[],[],[],[],[],[cx+0.025*ScreenX cy+ScreenY/8+(6)*(1.3*sideLength) cx+0.025*ScreenX+2*sideLength cy+ScreenY/8+(6)*(1.3*sideLength)+sideLength]);
+            ShowCursor;
+            Screen('Flip',onScreen)
+            %Wait for button press
+            while KbCheck
+            end
+        
+            FlushEvents('keyDown');
+            proceed = 0;
+            while proceed == 0
+                [keyIsDown, secs, keyCode] = KbCheck(-1);
+                if keyIsDown
+                    str = boxStringsAll(selectedBox);
+                    if keyCode(escKey)
+                        ListenChar(0); clear screen; error('User terminated script with ESCAPE key.')
+                    elseif keyCode(RAkey) && sumVals == 100
+                        proceed = 1;
+                        allGood = 1;
+                    elseif keyCode(Upkey)
+                        if selectedBox ~= 1
+                            selectedBox = selectedBox - 1;
+                        end
+                        proceed = 1;
+                    elseif keyCode(Downkey)
+                        if selectedBox ~= 6
+                            selectedBox = selectedBox + 1;
+                        end
+                        proceed = 1;
+                    elseif any(keyCode(numKeys))
+                        trueIndex = find(keyCode(numKeys));
+                        numOut = translatedNums(trueIndex);
+                        if strlength(str) ~= 2
+                            if str == " "
+                                newNum = num2str(numOut);
+                            else
+                                if str ~= "0"
+                                    newNum = str + num2str(numOut);
+                                end
+                            end
+                        elseif str == "10" && numOut == 0
+                            newNum = "100";
+                        end
+                        boxStringsAll(selectedBox) = newNum;
+                        boxValuesAll(selectedBox) = str2double(newNum);
+                        proceed = 1;
+                    elseif keyCode(backButton)
+                        if str ~= " "
+                            if strlength(str) == 1
+                                newNum = " ";
+                                boxValuesAll(selectedBox) = 0;
+                            else
+                                newNum = extractBefore(str, strlength(str));
+                                boxValuesAll(selectedBox) = str2double(newNum);
+                            end
+                            boxStringsAll(selectedBox) = newNum;
+                        end
+                        proceed = 1;
+                    end
+                end
+            end %while ~proceed
+            WaitSecs(.3);
+            Screen('Flip',onScreen);
+
+        end %while ~allGood
         
         
 
